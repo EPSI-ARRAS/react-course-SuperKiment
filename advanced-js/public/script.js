@@ -88,6 +88,7 @@ import morpion from "./morpion.js";
 function setupReact() {
   const container = document.getElementById("root");
   const root = ReactDOM.createRoot(container);
+  root.render(React.createElement("h1", {}, "Hello World !"));
 }
 setupReact();
 
