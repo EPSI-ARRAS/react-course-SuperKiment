@@ -82,7 +82,7 @@ for (let key in fruits) {
 }
 */
 
-import morpion from "./morpion";
+import morpion from "./morpion.js";
 
 //REACT
 function setupReact() {

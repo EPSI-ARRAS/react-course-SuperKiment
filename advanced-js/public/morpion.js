@@ -1,4 +1,4 @@
-export default morpion = () => {
+export default () => {
   let taille = +document.getElementById("taille").value;
   console.log(taille);
   const cases = [];
