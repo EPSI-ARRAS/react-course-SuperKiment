@@ -1,4 +1,7 @@
-/*
+const bonjour = 4;
+let salut = 7;
+var nePasUtiliser = "Pas bien";
+
 function jey(couco, salut, ...others) {
   console.log(couco);
   console.log(salut);
@@ -14,13 +17,21 @@ const fruits = {
   ukouoa: 5,
 };
 
+const fruits2 = {
+  ...fruits,
+  ukouko2: 5,
+  ukouka2: 5,
+  ukougk2: 5,
+  ukouoa2: 5,
+};
+
 const { ukougk: nice } = fruits;
 console.log(`valeur de l'objet : ${nice} !`);
 
 if (!undefined && !null && !"" && !0 && !NaN) {
   console.log("tout est faux");
 }
-console.log(!undefined, !null, !"", !0, !NaN);
+console.log(undefined, null, "", 0, NaN);
 
 const rien = "";
 
@@ -39,10 +50,14 @@ console.log(ajouteUnBonjour`John`);
 
 const fruitsArray = ["concombre", "pasteque", "euuuh jsp"];
 
+const { ukouko } = fruits;
+const { ukouko: ukoukoMaisAutre } = fruits2;
+console.log(ukouko);
+console.log(ukoukoMaisAutre);
+
 fruitsArray.forEach((element, index) => {
   console.log(`${index} : ${element}`);
 });
-
 
 const notes = [10, 6, 13, 18];
 const notesTab = notes.map((note) => note + 2);
@@ -80,7 +95,6 @@ for (let key in fruits) {
   const val = fruits[key];
   console.log(`${key} : ${val}`);
 }
-*/
 
 import morpion from "./morpion.js";
 
@@ -88,10 +102,20 @@ import morpion from "./morpion.js";
 function setupReact() {
   const container = document.getElementById("root");
   const root = ReactDOM.createRoot(container);
-  root.render(React.createElement("h1", {}, "Hello World !"));
+
+  const titre = React.createElement("h1", {}, "Mon blog");
+  const secondTitre = React.createElement("h2", {}, "Article de blog 1");
+  const p = React.createElement(
+    "p",
+    {},
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat…"
+  );
+
+  const div = React.createElement("div", {}, [secondTitre, p]);
+  const gene = React.createElement("div", {}, [titre, div]);
+  root.render(gene);
 }
 setupReact();
 
-
 //MORPION
-morpion()
+morpion();
