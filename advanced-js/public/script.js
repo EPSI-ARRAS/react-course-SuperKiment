@@ -1,3 +1,4 @@
+/*
 function jey(couco, salut, ...others) {
   console.log(couco);
   console.log(salut);
@@ -42,6 +43,7 @@ fruitsArray.forEach((element, index) => {
   console.log(`${index} : ${element}`);
 });
 
+
 const notes = [10, 6, 13, 18];
 const notesTab = notes.map((note) => note + 2);
 console.log(notesTab);
@@ -78,32 +80,66 @@ for (let key in fruits) {
   const val = fruits[key];
   console.log(`${key} : ${val}`);
 }
+*/
 
+let taille = +document.getElementById("taille").value;
+console.log(taille);
 const cases = [];
-
 const nomsJoueurs = ["", ""];
-
 let tour = 0;
 const tourText = document.getElementById("tour");
+const resetBtn = document.getElementById("reset");
+tourText.style.display = "none";
+resetBtn.style.display = "none";
 let jeuGagne = false;
 
+document.getElementById("jouer").addEventListener("click", () => {
+  taille = +document.getElementById("taille").value;
+
+  setupMorpion();
+
+  nomsJoueurs[0] = document.getElementById("joueur-1").value;
+  nomsJoueurs[1] = document.getElementById("joueur-2").value;
+
+  if (nomsJoueurs[0] != "" && nomsJoueurs[1] != "") {
+    morpion.style.display = "block";
+    document.getElementById("noms").style.display = "none";
+    document.getElementById(
+      "tour"
+    ).textContent = `Joueur ${nomsJoueurs[0]} commence !`;
+  }
+});
+
+resetBtn.addEventListener("click", () => {
+  taille = +document.getElementById("taille").value;
+
+  document.getElementById("table").innerHTML = "";
+
+  setupMorpion();
+});
+
 function setupMorpion() {
-  document.getElementById("morpion").style.display = "none";
+  const morpion = document.getElementById("morpion");
+  const tourText = document.getElementById("tour");
+  tourText.style.display = "block";
+  resetBtn.style.display = "block";
+  const morpionTable = morpion.getElementsByTagName("table")[0];
 
-  document.getElementById("jouer").addEventListener("click", () => {
-    nomsJoueurs[0] = document.getElementById("joueur-1").value;
-    nomsJoueurs[1] = document.getElementById("joueur-2").value;
-
-    if (nomsJoueurs[0] != "" && nomsJoueurs[1] != "") {
-      document.getElementById("morpion").style.display = "block";
-      document.getElementById("noms").style.display = "none";
-      document.getElementById("tour").textContent = `Joueur ${nomsJoueurs[0]} commence !`;
+  for (let x = 0; x < taille; x++) {
+    const row = document.createElement("tr");
+    for (let y = 0; y < taille; y++) {
+      const carre = document.createElement("td");
+      carre.id = `case-${x}-${y}`;
+      row.appendChild(carre);
     }
-  });
+    morpionTable.appendChild(row);
+  }
 
-  for (let x = 0; x < 3; x++) {
+  morpion.appendChild(morpionTable);
+
+  for (let x = 0; x < taille; x++) {
     let temp = [];
-    for (let y = 0; y < 3; y++) {
+    for (let y = 0; y < taille; y++) {
       const carre = document.getElementById(`case-${x}-${y}`);
 
       carre.position = {
@@ -113,7 +149,7 @@ function setupMorpion() {
       carre.clicked = false;
       carre.clickedBy = 0;
       carre.textContent = "O";
-      carre.style.color = "lightgrey";
+      carre.style.color = "white";
 
       carre.addEventListener("click", () => {
         if (!carre.clicked && !jeuGagne) {
@@ -134,38 +170,41 @@ function setupMorpion() {
 function isColumnClicked(x) {
   let allclicked = 0;
   cases[x].forEach((carre) => (allclicked += carre.clicked));
-  return allclicked == 3;
+  return allclicked == taille;
 }
 
 function isRowClicked(y) {
   let allclicked = 0;
   cases.forEach((row) => (allclicked += row[y].clicked));
-  return allclicked == 3;
+  return allclicked == taille;
 }
 
 function isDiagClicked(sens) {
   let allclicked = 0;
   if (sens) {
-    for (let i = 0; i < 3; i++) allclicked += cases[i][i].clicked;
+    for (let i = 0; i < taille; i++) allclicked += cases[i][i].clicked;
   } else {
-    for (let i = 0; i < 3; i++) allclicked += cases[i][2 - i].clicked;
+    for (let i = 0; i < taille; i++)
+      allclicked += cases[i][taille - 1 - i].clicked;
   }
-  return allclicked == 3;
+  return allclicked == taille;
 }
 
 function gagne(joueur) {
-  document.getElementById("gagne").textContent = `Joueur ${nomsJoueurs[joueur]} a gagné !!!`;
+  document.getElementById(
+    "gagne"
+  ).textContent = `Joueur ${nomsJoueurs[joueur]} a gagné !!!`;
   jeuGagne = true;
 }
 
 function updateMorpion() {
   tour = ++tour % 2;
   tourText.textContent = `Tour : Joueur ${nomsJoueurs[tour]} !`;
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < taille; i++) {
     if (isColumnClicked(i)) {
       let sum = 0;
       cases[i].forEach((carre) => (sum += carre.clickedBy));
-      if (sum % 3 == 0) {
+      if (sum % taille == 0) {
         gagne(cases[i][0].clickedBy);
       }
     }
@@ -173,28 +212,28 @@ function updateMorpion() {
     if (isRowClicked(i)) {
       let sum = 0;
       cases.forEach((row) => (sum += row[i].clickedBy));
-      if (sum % 3 == 0) {
+      if (sum % taille == 0) {
         gagne(cases[0][i].clickedBy);
       }
     }
 
     if (isDiagClicked(true)) {
       let sum = 0;
-      for (let i = 0; i < 3; i++) sum += cases[i][i].clicked;
-      if (sum % 3 == 0) {
+      for (let i = 0; i < taille; i++) sum += cases[i][i].clicked;
+      if (sum % taille == 0) {
         gagne(cases[0][0].clickedBy);
       }
     }
 
     if (isDiagClicked(false)) {
       let sum = 0;
-      for (let i = 0; i < 3; i++) sum += cases[i][2 - i].clicked;
-      if (sum % 3 == 0) {
+      for (let i = 0; i < taille; i++) sum += cases[i][taille - 1 - i].clicked;
+      if (sum % taille == 0) {
         gagne(cases[2][0].clickedBy);
       }
     }
   }
 }
 
-setupMorpion();
-console.log(cases);
+// setupMorpion();
+// console.log(cases);

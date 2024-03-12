@@ -7,36 +7,25 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1>lez goo</h1>
+    
+    <div class="container">
+      <h1>Morpion de la MORT</h1>
+      <div id="noms">
+        <h2>Entrez vos noms :</h2>
+        <p><input type="text" id="joueur-1" placeholder="Joueur 1" /></p>
+        <p><input type="text" id="joueur-2" placeholder="Joueur 2" /></p>
+        <p><input type="text" id="taille" value="3" placeholder="Taille"></p>
+        <button id="jouer">Jouer !</button>
+      </div>
 
-    <div id="noms">
-      <h2>Entrez vos noms :</h2>
-      <p><input type="text" id="joueur-1" placeholder="Joueur 1"/></p>
-      <p><input type="text" id="joueur-2" placeholder="Joueur 2"/></p>
-      <button id="jouer">Jouer !</button>
-    </div>
+      <div id="morpion">
+        <h1 id="gagne"></h1>
+        <p id="tour">Tour : Joueur 1</p>
 
-    <div id="morpion">
-      <h1 id="gagne"></h1>
-      <p id="tour">Tour : Joueur 1</p>
+        <table id="table"></table>
+      </div>
 
-      <table>
-        <tr>
-          <td id="case-0-0"></td>
-          <td id="case-1-0"></td>
-          <td id="case-2-0"></td>
-        </tr>
-        <tr>
-          <td id="case-0-1"></td>
-          <td id="case-1-1"></td>
-          <td id="case-2-1"></td>
-        </tr>
-        <tr>
-          <td id="case-0-2"></td>
-          <td id="case-1-2"></td>
-          <td id="case-2-2"></td>
-        </tr>
-      </table>
+      <button id="reset">Recommencer !</button>
     </div>
 
     <script src="./script.js" type="module"></script>
