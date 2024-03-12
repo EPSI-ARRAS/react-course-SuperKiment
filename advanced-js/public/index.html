@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    
+    <div id="root"></div>
+
     <div class="container">
       <h1>Morpion de la MORT</h1>
       <div id="noms">
         <h2>Entrez vos noms :</h2>
         <p><input type="text" id="joueur-1" placeholder="Joueur 1" /></p>
         <p><input type="text" id="joueur-2" placeholder="Joueur 2" /></p>
-        <p><input type="text" id="taille" value="3" placeholder="Taille"></p>
+        <p><input type="text" id="taille" value="3" placeholder="Taille" /></p>
         <button id="jouer">Jouer !</button>
       </div>
 
@@ -27,6 +28,9 @@
 
       <button id="reset">Recommencer !</button>
     </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
     <script src="./script.js" type="module"></script>
   </body>
