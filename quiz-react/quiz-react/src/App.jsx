@@ -1,35 +1,82 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createContext, useState } from "react";
+import "./App.css";
+import Quizz from "./components/Quizz";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [commencer, setCommencer] = useState(true);
+
+  const quizzs = [
+    {
+      questions: [
+        {
+          question: "salut",
+          propositions: ["1", "2", "3", "4"],
+          reponse: 2,
+          temps: 20,
+        },{
+          question: "coucou",
+          propositions: ["1", "2", "3", "4"],
+          reponse: 2,
+          temps: 10,
+        },{
+          question: "lezgo",
+          propositions: ["1", "2", "3", "4"],
+          reponse: 2,
+          temps: 5,
+        },{
+          question: "wouw",
+          propositions: ["1", "2", "3", "4", "4", "4"],
+          reponse: 2,
+          temps: 20,
+        },{
+          question: "salut",
+          propositions: ["1", "2", "3", "4"],
+          reponse: 2,
+          temps: 20,
+        },{
+          question: "salut",
+          propositions: ["1", "2", "3", "4"],
+          reponse: 2,
+          temps: 20,
+        },{
+          question: "salut",
+          propositions: ["1", "2", "3", "4"],
+          reponse: 2,
+          temps: 20,
+        },{
+          question: "derniere",
+          propositions: ["1", "2"],
+          reponse: 2,
+          temps: 20,
+        },
+      ],
+      nom: "premier quizz",
+    },
+    {
+      questions: [
+        {
+          question: "salut",
+          propositions: ["1", "2", "3", "4"],
+          reponse: 3,
+          temps: 20,
+        },
+      ],
+      nom: "second quizz",
+    },
+  ];
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {commencer ? (
+        <Quizz dataQuizz={quizzs[0]} />
+      ) : (
+        <>
+          <h1>Quizz</h1>
+          <button onClick={() => setCommencer(true)}>Commencer !</button>
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
