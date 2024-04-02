@@ -3,7 +3,7 @@ import "./App.css";
 import Quizz from "./components/Quizz";
 
 function App() {
-  const [commencer, setCommencer] = useState(true);
+  const [commencer, setCommencer] = useState(false);
 
   const quizzs = [
     {
