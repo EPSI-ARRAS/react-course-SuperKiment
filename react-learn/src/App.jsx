@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import TodoList from "./components/TodoList";
-import Morpion from "./components/Morpion";
+import Morpion from "./components/Morpion/Morpion";
 import Boutton from "./components/Boutton";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
   const [pages, setPages] = useState([]);
 
   useEffect(() => {
-    setPages([<TodoList />, <Morpion />]);
+    setPages([<Morpion />, <TodoList />]);
   }, []);
 
   const changerPage = () => {
